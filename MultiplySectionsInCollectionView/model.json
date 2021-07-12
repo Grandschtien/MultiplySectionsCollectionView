@@ -1,0 +1,69 @@
+[
+    {
+    "type": "Numbers",
+    "items": [
+            {
+                "item":"10"
+            },
+            {
+                "item":"20"
+            },
+            {
+                "item":"30"
+            },
+            {
+                "item":"40"
+            },
+            {
+                "item":"50"
+            }
+        ]
+    },
+    {
+        "type": "Emoji",
+    "items": [
+            {
+                "item":"🍈"
+            },
+            {
+                "item": "🍅"
+            },
+            {
+                "item": "🍳"
+            },
+            {
+                "item": "🍖"
+            },
+            {
+                "item": "🥙"
+                
+            }
+        ]
+    },
+    {
+        "type": "Names",
+        "items": [
+            {
+                "item": "Egor"
+            },
+            {
+                "item": "Mirza"
+            },
+            {
+                "item": "Tamik"
+            },
+            {
+                "item": "Nika"
+            },
+            {
+                "item": "Lol"
+            },
+            {
+                "item": "Alex"
+            }
+        ]
+    }
+]
+
+
+    
