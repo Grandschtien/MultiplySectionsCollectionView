@@ -25,6 +25,9 @@
 		6022F16F2697539E00B3A364 /* model.json in Resources */ = {isa = PBXBuildFile; fileRef = 6022F16E2697539E00B3A364 /* model.json */; };
 		60DE47D2269B4273004C972C /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE47D1269B4273004C972C /* SectionHeader.swift */; };
 		60DE47D5269B4F63004C972C /* NameSectionDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE47D4269B4F63004C972C /* NameSectionDecorationView.swift */; };
+		60DE47E6269F24B6004C972C /* NameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE47E5269F24B6004C972C /* NameViewController.swift */; };
+		60DE47E8269F24C9004C972C /* EmojiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE47E7269F24C9004C972C /* EmojiViewController.swift */; };
+		60DE47EA269F24D9004C972C /* NumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE47E9269F24D9004C972C /* NumberViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +51,9 @@
 		6022F16E2697539E00B3A364 /* model.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = model.json; sourceTree = "<group>"; };
 		60DE47D1269B4273004C972C /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		60DE47D4269B4F63004C972C /* NameSectionDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameSectionDecorationView.swift; sourceTree = "<group>"; };
+		60DE47E5269F24B6004C972C /* NameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameViewController.swift; sourceTree = "<group>"; };
+		60DE47E7269F24C9004C972C /* EmojiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewController.swift; sourceTree = "<group>"; };
+		60DE47E9269F24D9004C972C /* NumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,8 +86,10 @@
 		6022F13A2695AB9200B3A364 /* MultiplySectionsInCollectionView */ = {
 			isa = PBXGroup;
 			children = (
-				6022F1672697522500B3A364 /* Models */,
-				6022F1502695ABB900B3A364 /* Controller */,
+				60DE47D9269F2417004C972C /* NumberController */,
+				60DE47DA269F241D004C972C /* EmojiController */,
+				60DE47DB269F2427004C972C /* NameController */,
+				60DE47D8269F2406004C972C /* CollectionController */,
 				6022F13B2695AB9200B3A364 /* AppDelegate.swift */,
 				6022F16C2697536000B3A364 /* Decoder.swift */,
 				6022F13D2695AB9200B3A364 /* SceneDelegate.swift */,
@@ -89,7 +97,6 @@
 				6022F1442695AB9700B3A364 /* Assets.xcassets */,
 				6022F1462695AB9700B3A364 /* LaunchScreen.storyboard */,
 				6022F1492695AB9700B3A364 /* Info.plist */,
-				6022F16E2697539E00B3A364 /* model.json */,
 			);
 			path = MultiplySectionsInCollectionView;
 			sourceTree = "<group>";
@@ -111,9 +118,6 @@
 			isa = PBXGroup;
 			children = (
 				6022F13F2695AB9200B3A364 /* ViewController.swift */,
-				60DE47D3269B4F49004C972C /* Decoration */,
-				60DE47D0269B4264004C972C /* Headers */,
-				6022F14F2695ABAF00B3A364 /* Cells */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -123,6 +127,7 @@
 			children = (
 				6022F1682697526500B3A364 /* Section.swift */,
 				6022F16A2697526B00B3A364 /* Item.swift */,
+				6022F16E2697539E00B3A364 /* model.json */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -141,6 +146,123 @@
 				60DE47D4269B4F63004C972C /* NameSectionDecorationView.swift */,
 			);
 			path = Decoration;
+			sourceTree = "<group>";
+		};
+		60DE47D6269C8A9E004C972C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				60DE47D3269B4F49004C972C /* Decoration */,
+				60DE47D0269B4264004C972C /* Headers */,
+				6022F14F2695ABAF00B3A364 /* Cells */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		60DE47D8269F2406004C972C /* CollectionController */ = {
+			isa = PBXGroup;
+			children = (
+				6022F1672697522500B3A364 /* Models */,
+				60DE47D6269C8A9E004C972C /* View */,
+				6022F1502695ABB900B3A364 /* Controller */,
+			);
+			path = CollectionController;
+			sourceTree = "<group>";
+		};
+		60DE47D9269F2417004C972C /* NumberController */ = {
+			isa = PBXGroup;
+			children = (
+				60DE47E4269F2499004C972C /* Model */,
+				60DE47E3269F2496004C972C /* View */,
+				60DE47E2269F2494004C972C /* Controller */,
+			);
+			path = NumberController;
+			sourceTree = "<group>";
+		};
+		60DE47DA269F241D004C972C /* EmojiController */ = {
+			isa = PBXGroup;
+			children = (
+				60DE47E1269F2480004C972C /* Model */,
+				60DE47E0269F247B004C972C /* View */,
+				60DE47DF269F2477004C972C /* Controller */,
+			);
+			path = EmojiController;
+			sourceTree = "<group>";
+		};
+		60DE47DB269F2427004C972C /* NameController */ = {
+			isa = PBXGroup;
+			children = (
+				60DE47DC269F245A004C972C /* Model */,
+				60DE47DD269F245F004C972C /* View */,
+				60DE47DE269F2463004C972C /* Controller */,
+			);
+			path = NameController;
+			sourceTree = "<group>";
+		};
+		60DE47DC269F245A004C972C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		60DE47DD269F245F004C972C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		60DE47DE269F2463004C972C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				60DE47E5269F24B6004C972C /* NameViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		60DE47DF269F2477004C972C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				60DE47E7269F24C9004C972C /* EmojiViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		60DE47E0269F247B004C972C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			path = "New Group/View";
+			sourceTree = "<group>";
+		};
+		60DE47E1269F2480004C972C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		60DE47E2269F2494004C972C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				60DE47E9269F24D9004C972C /* NumberViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		60DE47E3269F2496004C972C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		60DE47E4269F2499004C972C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,6 +343,7 @@
 				6022F1402695AB9200B3A364 /* ViewController.swift in Sources */,
 				60DE47D2269B4273004C972C /* SectionHeader.swift in Sources */,
 				6022F1652695F70B00B3A364 /* StringCell.swift in Sources */,
+				60DE47E8269F24C9004C972C /* EmojiViewController.swift in Sources */,
 				60DE47D5269B4F63004C972C /* NameSectionDecorationView.swift in Sources */,
 				6022F1692697526500B3A364 /* Section.swift in Sources */,
 				6022F16D2697536000B3A364 /* Decoder.swift in Sources */,
@@ -228,6 +351,8 @@
 				6022F13C2695AB9200B3A364 /* AppDelegate.swift in Sources */,
 				6022F13E2695AB9200B3A364 /* SceneDelegate.swift in Sources */,
 				6022F1612695F6FA00B3A364 /* NumberCell.swift in Sources */,
+				60DE47E6269F24B6004C972C /* NameViewController.swift in Sources */,
+				60DE47EA269F24D9004C972C /* NumberViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

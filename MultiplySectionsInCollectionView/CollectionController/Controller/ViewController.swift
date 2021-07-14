@@ -10,22 +10,24 @@ import UIKit
 class ViewController: UIViewController {
     private var sections = Bundle.main.decode([Section].self, from: "model.json")
     static let sectionBackgroundDecorationElementKind = "background-element-kind"
-    var dataSource: UICollectionViewDiffableDataSource<Section, Item>! = nil
-    var collectionView: UICollectionView! = nil
+    fileprivate var dataSource: UICollectionViewDiffableDataSource<Section, Item>! = nil
+    fileprivate var collectionView: UICollectionView! = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Sections"
-        navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 0.9205599797, green: 0.9057139885, blue: 0.953373499, alpha: 1)
-        navigationController?.toolbar.backgroundColor = #colorLiteral(red: 0.9205599797, green: 0.9057139885, blue: 0.953373499, alpha: 1)
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.shadowImage = UIImage()
         configure()
         configureDataSource()
         reloadData()
+        collectionView.delegate = self
     }
     private func configure() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
         collectionView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView?.backgroundColor = #colorLiteral(red: 0.9205599797, green: 0.9057139885, blue: 0.953373499, alpha: 1)
+        collectionView?.backgroundColor = #colorLiteral(red: 0.880524771, green: 0.9031272657, blue: 0.875127862, alpha: 1)
+        navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
         view.addSubview(collectionView!)
         collectionView.register(UINib(nibName: "EmojiCell", bundle: nil), forCellWithReuseIdentifier: EmojiCell.reuseId)
         collectionView.register(UINib(nibName: "NumberCell", bundle: nil), forCellWithReuseIdentifier: NumberCell.reuseId)
@@ -59,6 +61,7 @@ extension ViewController {
                 return nil
             }
         }
+        layout.register(NameSectionDecorationView.self, forDecorationViewOfKind: ViewController.sectionBackgroundDecorationElementKind)
         return layout
     }
 }
@@ -74,7 +77,7 @@ extension ViewController {
         layoutItem.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 8, bottom: 0, trailing: 8)
         
         
-        let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .estimated(200),
+        let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .estimated(250),
                                                      heightDimension: .estimated(88))
         let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitems: [layoutItem])
         
@@ -106,14 +109,11 @@ extension ViewController {
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
-        //section.orthogonalScrollingBehavior = .continuous
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
-        let header = createHeader()
-        section.boundarySupplementaryItems = [header]
-//        let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(
-//            elementKind: ViewController.sectionBackgroundDecorationElementKind)
-//        sectionBackgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
-//        section.decorationItems = [sectionBackgroundDecoration]
+        let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(
+            elementKind: ViewController.sectionBackgroundDecorationElementKind)
+        
+        section.decorationItems = [sectionBackgroundDecoration]
         return section
     }
 }
@@ -175,10 +175,50 @@ extension ViewController {
         return header
     }
 }
-// MARK: - Section decorating
+// MARK: - Collection view delegate
 
-extension ViewController {
-    private func setupDecorate() {
+extension ViewController: UICollectionViewDelegate{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let firstItem = self.dataSource.itemIdentifier(for: indexPath) else { return }
+        let section = self.dataSource.snapshot().sectionIdentifier(containingItem: firstItem)
         
+        switch section?.type {
+        case "Emoji":
+            print("Emoji section tapped at index: \(indexPath.item)")
+        case "Numbers":
+            print("Numbers section tapped at index: \(indexPath.item)")
+        case "Names":
+            print("Names section tapped at index: \(indexPath.item)")
+        default:
+            break
+        }
+    }
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+       let cell = collectionView.cellForItem(at: indexPath)
+        UIView.animate(withDuration: 0.6) {
+            cell?.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            cell?.alpha = 0.5
+        }
+    }
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        UIView.animate(withDuration: 0.4) {
+            cell?.transform = CGAffineTransform(scaleX: 1, y: 1)
+            cell?.alpha = 1
+        }
+    }
+}
+extension ViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "NumberSegue":
+            break
+        case "EmojiSegue":
+            break
+        case "NameSegue":
+            break
+        default:
+            break
+        }
     }
 }
