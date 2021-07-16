@@ -8,10 +8,12 @@
 import UIKit
 
 class NameViewController: UIViewController {
-
+    var name = ""
+    @IBOutlet weak var label: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        label.text = name
         // Do any additional setup after loading the view.
     }
     

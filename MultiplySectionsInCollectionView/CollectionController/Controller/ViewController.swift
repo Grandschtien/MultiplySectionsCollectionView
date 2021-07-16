@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     static let sectionBackgroundDecorationElementKind = "background-element-kind"
     fileprivate var dataSource: UICollectionViewDiffableDataSource<Section, Item>! = nil
     fileprivate var collectionView: UICollectionView! = nil
-    
+    private var indexPathOfSelectedCell: IndexPath?
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Sections"
@@ -23,6 +23,7 @@ class ViewController: UIViewController {
         reloadData()
         collectionView.delegate = self
     }
+    //MARK:- Configurate collectionView
     private func configure() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
         collectionView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -33,7 +34,6 @@ class ViewController: UIViewController {
         collectionView.register(UINib(nibName: "NumberCell", bundle: nil), forCellWithReuseIdentifier: NumberCell.reuseId)
         collectionView.register(UINib(nibName: "StringCell", bundle: nil), forCellWithReuseIdentifier: StringCell.reuseId)
         collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseId)
-      //  collectionView.register(NameSectionDecorationView.self, forSupplementaryViewOfKind: ViewController.sectionBackgroundDecorationElementKind, withReuseIdentifier: NameSectionDecorationView.reuseId)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
     }
@@ -86,7 +86,6 @@ extension ViewController {
         section.contentInsets = NSDirectionalEdgeInsets.init(top: 10, leading: 12, bottom: 15, trailing: 12)
         let header = createHeader()
         section.boundarySupplementaryItems = [header]
-        
         return section
     }
     private func createEmojiSection() -> NSCollectionLayoutSection {
@@ -105,14 +104,13 @@ extension ViewController {
     private func createStringSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(100))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15)
+        //item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15)
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
         let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(
             elementKind: ViewController.sectionBackgroundDecorationElementKind)
-        
         section.decorationItems = [sectionBackgroundDecoration]
         return section
     }
@@ -183,42 +181,70 @@ extension ViewController: UICollectionViewDelegate{
         let section = self.dataSource.snapshot().sectionIdentifier(containingItem: firstItem)
         
         switch section?.type {
-        case "Emoji":
-            print("Emoji section tapped at index: \(indexPath.item)")
         case "Numbers":
-            print("Numbers section tapped at index: \(indexPath.item)")
+            performSegue(withIdentifier: "NumberSegue", sender: nil)
+        case "Emoji":
+            let cell = collectionView.cellForItem(at: indexPath)
+            
+            if let previousIndex = indexPathOfSelectedCell {
+                let previousCell = collectionView.cellForItem(at: previousIndex)
+                previousCell?.backgroundColor = .clear
+                cell?.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+            } else {
+                cell?.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+            }
+            indexPathOfSelectedCell = indexPath
+            performSegue(withIdentifier: "EmojiSegue", sender: nil)
         case "Names":
-            print("Names section tapped at index: \(indexPath.item)")
+            performSegue(withIdentifier: "NameSegue", sender: nil)
         default:
             break
         }
     }
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-       let cell = collectionView.cellForItem(at: indexPath)
-        UIView.animate(withDuration: 0.6) {
-            cell?.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-            cell?.alpha = 0.5
+        guard let cell = collectionView.cellForItem(at: indexPath) as? NumberCell else { return }
+        UIView.animate(withDuration: 0.3) {
+            cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            cell.alpha = 0.5
+            
         }
     }
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
-        UIView.animate(withDuration: 0.4) {
-            cell?.transform = CGAffineTransform(scaleX: 1, y: 1)
-            cell?.alpha = 1
+        guard let cell = collectionView.cellForItem(at: indexPath) as? NumberCell else { return }
+        UIView.animate(withDuration: 0.3) {
+            cell.transform = CGAffineTransform(scaleX: 1, y: 1)
+            cell.alpha = 1
         }
     }
 }
+//MARK:- Segues
 extension ViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "NumberSegue":
-            break
+            guard let destinationVC = segue.destination as? NumberViewController,
+                  let item = collectionView.indexPathsForSelectedItems,
+                  let firstIndexPath = item.first,
+                  let firstItem = self.dataSource.itemIdentifier(for: firstIndexPath)
+            else { return }
+            destinationVC.number  = firstItem.item
         case "EmojiSegue":
-            break
+            guard let destinationVC = segue.destination as? EmojiViewController,
+                  let item = collectionView.indexPathsForSelectedItems,
+                  let firstIndexPath = item.first,
+                  let firstItem = self.dataSource.itemIdentifier(for: firstIndexPath)
+            else { return }
+            destinationVC.emoji = firstItem.item
         case "NameSegue":
-            break
+            guard let destinationVC = segue.destination as? NameViewController,
+                  let item = collectionView.indexPathsForSelectedItems,
+                  let firstIndexPath = item.first,
+                  let firstItem = self.dataSource.itemIdentifier(for: firstIndexPath)
+            else { return }
+            destinationVC.name = firstItem.item
         default:
             break
         }
     }
 }
+

@@ -30,10 +30,10 @@
             </objects>
             <point key="canvasLocation" x="955.07246376811599" y="71.651785714285708"/>
         </scene>
-        <!--View Controller-->
+        <!--Number View Controller-->
         <scene sceneID="754-rP-boX">
             <objects>
-                <viewController id="AI1-59-qAg" sceneMemberID="viewController">
+                <viewController id="AI1-59-qAg" customClass="NumberViewController" customModule="MultiplySectionsInCollectionView" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kaU-Xg-6UU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -53,15 +53,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="GdZ-No-2pf"/>
+                    <connections>
+                        <outlet property="label" destination="8iS-JT-AuP" id="zhD-mz-35I"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yqV-Mg-7uc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2535" y="-620"/>
         </scene>
-        <!--View Controller-->
+        <!--Name View Controller-->
         <scene sceneID="pzd-t6-9T0">
             <objects>
-                <viewController id="tEe-5L-QpM" sceneMemberID="viewController">
+                <viewController id="tEe-5L-QpM" customClass="NameViewController" customModule="MultiplySectionsInCollectionView" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="k5h-7U-KO5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -81,15 +84,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ayB-MA-fxv"/>
+                    <connections>
+                        <outlet property="label" destination="gd0-jf-flr" id="9aq-f8-YQz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e40-SN-EIH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2535" y="667"/>
         </scene>
-        <!--View Controller-->
+        <!--Emoji View Controller-->
         <scene sceneID="ggY-EQ-eaL">
             <objects>
-                <viewController id="i89-E5-7md" sceneMemberID="viewController">
+                <viewController id="i89-E5-7md" customClass="EmojiViewController" customModule="MultiplySectionsInCollectionView" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bCB-i8-INy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -109,6 +115,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="iIX-Y3-EU5"/>
+                    <connections>
+                        <outlet property="label" destination="aDe-IW-E36" id="1ha-nR-Mr0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WP8-5g-4Br" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

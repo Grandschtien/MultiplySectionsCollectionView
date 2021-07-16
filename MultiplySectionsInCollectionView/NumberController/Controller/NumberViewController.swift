@@ -8,10 +8,12 @@
 import UIKit
 
 class NumberViewController: UIViewController {
-
+    var number = ""
+    @IBOutlet weak var label: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        label.text = number
         // Do any additional setup after loading the view.
     }
     

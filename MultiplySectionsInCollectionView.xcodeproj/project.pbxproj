@@ -28,6 +28,7 @@
 		60DE47E6269F24B6004C972C /* NameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE47E5269F24B6004C972C /* NameViewController.swift */; };
 		60DE47E8269F24C9004C972C /* EmojiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE47E7269F24C9004C972C /* EmojiViewController.swift */; };
 		60DE47EA269F24D9004C972C /* NumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE47E9269F24D9004C972C /* NumberViewController.swift */; };
+		60DE47EC26A1B196004C972C /* CALayer + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE47EB26A1B196004C972C /* CALayer + extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		60DE47E5269F24B6004C972C /* NameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameViewController.swift; sourceTree = "<group>"; };
 		60DE47E7269F24C9004C972C /* EmojiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewController.swift; sourceTree = "<group>"; };
 		60DE47E9269F24D9004C972C /* NumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberViewController.swift; sourceTree = "<group>"; };
+		60DE47EB26A1B196004C972C /* CALayer + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer + extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,8 +92,8 @@
 				60DE47DA269F241D004C972C /* EmojiController */,
 				60DE47DB269F2427004C972C /* NameController */,
 				60DE47D8269F2406004C972C /* CollectionController */,
+				60DE47ED26A1B1A8004C972C /* Helpers */,
 				6022F13B2695AB9200B3A364 /* AppDelegate.swift */,
-				6022F16C2697536000B3A364 /* Decoder.swift */,
 				6022F13D2695AB9200B3A364 /* SceneDelegate.swift */,
 				6022F1412695AB9200B3A364 /* Main.storyboard */,
 				6022F1442695AB9700B3A364 /* Assets.xcassets */,
@@ -265,6 +267,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		60DE47ED26A1B1A8004C972C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6022F16C2697536000B3A364 /* Decoder.swift */,
+				60DE47EB26A1B196004C972C /* CALayer + extension.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -352,6 +363,7 @@
 				6022F13E2695AB9200B3A364 /* SceneDelegate.swift in Sources */,
 				6022F1612695F6FA00B3A364 /* NumberCell.swift in Sources */,
 				60DE47E6269F24B6004C972C /* NameViewController.swift in Sources */,
+				60DE47EC26A1B196004C972C /* CALayer + extension.swift in Sources */,
 				60DE47EA269F24D9004C972C /* NumberViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,14 +14,12 @@ class StringCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
     func configureCell(item: Item) {
         self.label.text = item.item
         self.label.textAlignment = .center
-        self.contentView.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
-        self.layer.cornerRadius = 10
-        self.label.textColor = .white
-        self.layer.shadowRadius = 10
-        self.layer.shadowOffset = CGSize(width: self.frame.width, height: self.frame.height)
-        self.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        self.label.textColor = .black
+        self.layer.addBorder(edge: .bottom, color: #colorLiteral(red: 0.804650509, green: 0.804650509, blue: 0.804650509, alpha: 1), thickness: 0.5)
     }
 }
+
