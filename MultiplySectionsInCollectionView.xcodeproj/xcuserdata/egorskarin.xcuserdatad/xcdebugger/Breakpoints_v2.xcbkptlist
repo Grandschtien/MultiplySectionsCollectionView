@@ -20,5 +20,209 @@
             landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0F97A621-9E77-4E2F-BA89-ACC8315E44A0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MultiplySectionsInCollectionView/CollectionController/Controller/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "11"
+            endingLineNumber = "11"
+            landmarkName = "ViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "0F97A621-9E77-4E2F-BA89-ACC8315E44A0 - 2773cdc7558942e4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MultiplySectionsInCollectionView.ViewController.sections.getter : Swift.Array&lt;MultiplySectionsInCollectionView.Section&gt;"
+                  moduleName = "MultiplySectionsInCollectionView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/egorskarin/Documents/Projects/MultiplySectionsInCollectionView/MultiplySectionsInCollectionView/CollectionController/Controller/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "11"
+                  endingLineNumber = "11"
+                  offsetFromSymbolStart = "122">
+               </Location>
+               <Location
+                  uuid = "0F97A621-9E77-4E2F-BA89-ACC8315E44A0 - 32d60a6d2864bef8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MultiplySectionsInCollectionView.ViewController.sections.setter : Swift.Array&lt;MultiplySectionsInCollectionView.Section&gt;"
+                  moduleName = "MultiplySectionsInCollectionView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/egorskarin/Documents/Projects/MultiplySectionsInCollectionView/MultiplySectionsInCollectionView/CollectionController/Controller/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "11"
+                  endingLineNumber = "11"
+                  offsetFromSymbolStart = "148">
+               </Location>
+               <Location
+                  uuid = "0F97A621-9E77-4E2F-BA89-ACC8315E44A0 - f873a07313b4c37c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MultiplySectionsInCollectionView.ViewController.sections.modify : Swift.Array&lt;MultiplySectionsInCollectionView.Section&gt;"
+                  moduleName = "MultiplySectionsInCollectionView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/egorskarin/Documents/Projects/MultiplySectionsInCollectionView/MultiplySectionsInCollectionView/CollectionController/Controller/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "18">
+               </Location>
+               <Location
+                  uuid = "0F97A621-9E77-4E2F-BA89-ACC8315E44A0 - ebc347e178d7baf9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MultiplySectionsInCollectionView.ViewController.sections.modify : Swift.Array&lt;MultiplySectionsInCollectionView.Section&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "MultiplySectionsInCollectionView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/egorskarin/Documents/Projects/MultiplySectionsInCollectionView/MultiplySectionsInCollectionView/CollectionController/Controller/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "11"
+                  endingLineNumber = "11"
+                  offsetFromSymbolStart = "8">
+               </Location>
+               <Location
+                  uuid = "0F97A621-9E77-4E2F-BA89-ACC8315E44A0 - 663adcc6b7e149c1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MultiplySectionsInCollectionView.ViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; MultiplySectionsInCollectionView.ViewController"
+                  moduleName = "MultiplySectionsInCollectionView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/egorskarin/Documents/Projects/MultiplySectionsInCollectionView/MultiplySectionsInCollectionView/CollectionController/Controller/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "11"
+                  endingLineNumber = "11"
+                  offsetFromSymbolStart = "198">
+               </Location>
+               <Location
+                  uuid = "0F97A621-9E77-4E2F-BA89-ACC8315E44A0 - fa38cd6740b39a8d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MultiplySectionsInCollectionView.ViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;MultiplySectionsInCollectionView.ViewController&gt;"
+                  moduleName = "MultiplySectionsInCollectionView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/egorskarin/Documents/Projects/MultiplySectionsInCollectionView/MultiplySectionsInCollectionView/CollectionController/Controller/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "11"
+                  endingLineNumber = "11"
+                  offsetFromSymbolStart = "151">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2B1DD4EC-CC56-47EC-A175-A4113F446ACB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MultiplySectionsInCollectionView/CollectionController/View/Headers/SectionHeader.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "createDataSource()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CF1D0919-ABBB-4C00-8BEE-E9DFE11C1A6B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MultiplySectionsInCollectionView/CollectionController/View/Headers/SectionHeader.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "reloadData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2E2C488A-B959-46D3-9418-742F869CCC8B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MultiplySectionsInCollectionView/CollectionController/View/Headers/SectionHeader.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "createLayout()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2E2C488A-B959-46D3-9418-742F869CCC8B - a3e80ca769022154"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MultiplySectionsInCollectionView.SectionHeader.createLayout() -&gt; __C.UICollectionViewLayout"
+                  moduleName = "MultiplySectionsInCollectionView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/egorskarin/Documents/Projects/MultiplySectionsInCollectionView/MultiplySectionsInCollectionView/CollectionController/View/Headers/SectionHeader.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "38">
+               </Location>
+               <Location
+                  uuid = "2E2C488A-B959-46D3-9418-742F869CCC8B - 1d17a1645b5c0462"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Int, __C.NSCollectionLayoutEnvironment) -&gt; Swift.Optional&lt;__C.NSCollectionLayoutSection&gt; in MultiplySectionsInCollectionView.SectionHeader.createLayout() -&gt; __C.UICollectionViewLayout"
+                  moduleName = "MultiplySectionsInCollectionView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/egorskarin/Documents/Projects/MultiplySectionsInCollectionView/MultiplySectionsInCollectionView/CollectionController/View/Headers/SectionHeader.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "185">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "ADA8D74F-37A9-4B29-8500-B8F230FD6025"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MultiplySectionsInCollectionView/CollectionController/View/Headers/SectionHeader.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "createEmojiSection()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

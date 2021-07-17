@@ -12,7 +12,6 @@ class ViewController: UIViewController {
     static let sectionBackgroundDecorationElementKind = "background-element-kind"
     fileprivate var dataSource: UICollectionViewDiffableDataSource<Section, Item>! = nil
     fileprivate var collectionView: UICollectionView! = nil
-    private var indexPathOfSelectedCell: IndexPath?
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Sections"
@@ -30,12 +29,12 @@ class ViewController: UIViewController {
         collectionView?.backgroundColor = #colorLiteral(red: 0.880524771, green: 0.9031272657, blue: 0.875127862, alpha: 1)
         navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
         view.addSubview(collectionView!)
-        collectionView.register(UINib(nibName: "EmojiCell", bundle: nil), forCellWithReuseIdentifier: EmojiCell.reuseId)
         collectionView.register(UINib(nibName: "NumberCell", bundle: nil), forCellWithReuseIdentifier: NumberCell.reuseId)
         collectionView.register(UINib(nibName: "StringCell", bundle: nil), forCellWithReuseIdentifier: StringCell.reuseId)
         collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseId)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
+       
     }
     
 }
@@ -52,12 +51,10 @@ extension ViewController {
             switch section.type {
             case "Numbers":
                 return self?.createNumberSection()
-            case "Emoji":
-                return self?.createEmojiSection()
             case "Names":
                 return self?.createStringSection()
             default:
-                print("There is no needed item")
+                print("There is no such item")
                 return nil
             }
         }
@@ -84,34 +81,23 @@ extension ViewController {
         let section = NSCollectionLayoutSection(group: layoutGroup)
         section.orthogonalScrollingBehavior = .continuous
         section.contentInsets = NSDirectionalEdgeInsets.init(top: 10, leading: 12, bottom: 15, trailing: 12)
-        let header = createHeader()
-        section.boundarySupplementaryItems = [header]
-        return section
-    }
-    private func createEmojiSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(120), heightDimension: .estimated(50))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 12, bottom: 15, trailing: 12)
-        let header = createHeader()
-        section.boundarySupplementaryItems = [header]
         return section
     }
     private func createStringSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(100))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        //item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15)
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
         let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(
             elementKind: ViewController.sectionBackgroundDecorationElementKind)
+        sectionBackgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 90, leading: 0, bottom: 0, trailing: 0)
         section.decorationItems = [sectionBackgroundDecoration]
+        let header = createHeader()
+        section.boundarySupplementaryItems = [header]
+        header.zIndex = 2
+        header.pinToVisibleBounds = true
         return section
     }
 }
@@ -127,10 +113,6 @@ extension ViewController {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NumberCell.reuseId, for: indexPath) as? NumberCell else {return nil}
                 cell.configureCell(item: item)
                 return cell
-            case "Emoji":
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmojiCell.reuseId, for: indexPath) as? EmojiCell else {return nil}
-                cell.configureCell(item: item)
-                return cell
             case "Names":
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: StringCell.reuseId, for: indexPath) as? StringCell else {return nil}
                 cell.configureCell(item: item)
@@ -138,16 +120,11 @@ extension ViewController {
             default:
                 print("There is no such item")
                 return nil
-                
             }
         }
-        dataSource.supplementaryViewProvider = { [weak self]
+        dataSource.supplementaryViewProvider = {
             collectionView, kind, indexPath in
             guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeader.reuseId, for: indexPath) as? SectionHeader else { return nil }
-            guard let firstItem = self?.dataSource.itemIdentifier(for: indexPath) else { return nil }
-            guard let section = self?.dataSource.snapshot().sectionIdentifier(containingItem: firstItem) else { return nil }
-            if section.type.isEmpty { return nil }
-            sectionHeader.title.text = section.type
             return sectionHeader
         }
     }
@@ -158,9 +135,10 @@ extension ViewController {
         snapshot.appendSections(sections)
         
         for section in sections {
-            snapshot.appendItems(section.items, toSection: section)
+            if section.type == "Numbers" || section.type == "Names" {
+                snapshot.appendItems(section.items, toSection: section)
+            }
         }
-        
         dataSource?.apply(snapshot)
     }
 }
@@ -168,8 +146,9 @@ extension ViewController {
 //MARK:- Header to collectionView
 extension ViewController {
     private func createHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(1))
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(100))
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+        header.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0)
         return header
     }
 }
@@ -183,18 +162,6 @@ extension ViewController: UICollectionViewDelegate{
         switch section?.type {
         case "Numbers":
             performSegue(withIdentifier: "NumberSegue", sender: nil)
-        case "Emoji":
-            let cell = collectionView.cellForItem(at: indexPath)
-            
-            if let previousIndex = indexPathOfSelectedCell {
-                let previousCell = collectionView.cellForItem(at: previousIndex)
-                previousCell?.backgroundColor = .clear
-                cell?.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
-            } else {
-                cell?.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
-            }
-            indexPathOfSelectedCell = indexPath
-            performSegue(withIdentifier: "EmojiSegue", sender: nil)
         case "Names":
             performSegue(withIdentifier: "NameSegue", sender: nil)
         default:
@@ -228,13 +195,6 @@ extension ViewController {
                   let firstItem = self.dataSource.itemIdentifier(for: firstIndexPath)
             else { return }
             destinationVC.number  = firstItem.item
-        case "EmojiSegue":
-            guard let destinationVC = segue.destination as? EmojiViewController,
-                  let item = collectionView.indexPathsForSelectedItems,
-                  let firstIndexPath = item.first,
-                  let firstItem = self.dataSource.itemIdentifier(for: firstIndexPath)
-            else { return }
-            destinationVC.emoji = firstItem.item
         case "NameSegue":
             guard let destinationVC = segue.destination as? NameViewController,
                   let item = collectionView.indexPathsForSelectedItems,
