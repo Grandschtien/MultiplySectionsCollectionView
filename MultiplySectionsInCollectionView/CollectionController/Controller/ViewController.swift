@@ -8,7 +8,9 @@
 import UIKit
 
 class ViewController: UIViewController {
-    private var sections = Bundle.main.decode([Section].self, from: "model.json")
+    private var sections = Bundle.main.decode([Section].self, from: "model.json").filter { section in
+        return section.type != "Emoji"
+    }
     static let sectionBackgroundDecorationElementKind = "background-element-kind"
     fileprivate var dataSource: UICollectionViewDiffableDataSource<Section, Item>! = nil
     fileprivate var collectionView: UICollectionView! = nil
@@ -89,7 +91,7 @@ extension ViewController {
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(
             elementKind: ViewController.sectionBackgroundDecorationElementKind)
         sectionBackgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 90, leading: 0, bottom: 0, trailing: 0)
@@ -148,7 +150,7 @@ extension ViewController {
     private func createHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(100))
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-        header.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0)
+        header.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 10, trailing: 0)
         return header
     }
 }

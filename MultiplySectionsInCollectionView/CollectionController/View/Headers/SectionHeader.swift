@@ -9,7 +9,9 @@ import UIKit
 
 class SectionHeader: UICollectionReusableView {
     static let reuseId = "SectionHeader"
-    var sections: [Section] = Bundle.main.decode([Section].self, from: "model.json")
+    var sections: [Section] = Bundle.main.decode([Section].self, from: "model.json").filter { section in
+        return section.type != "Names" && section.type != "Numbers"
+    }
     private var indexPathOfSelectedCell: IndexPath?
     
     fileprivate var collectionView: UICollectionView! = nil
@@ -17,6 +19,7 @@ class SectionHeader: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         cofigureCollectionView()
         setupConstraints()
         createDataSource()
@@ -31,8 +34,9 @@ class SectionHeader: UICollectionReusableView {
     //MARK:- Configure collection view
     private func cofigureCollectionView() {
         collectionView = UICollectionView(frame: self.bounds, collectionViewLayout: createLayout())
-        collectionView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.backgroundColor = .clear
+        //collectionView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        collectionView.backgroundColor = #colorLiteral(red: 0.880524771, green: 0.9031272657, blue: 0.875127862, alpha: 1)
         collectionView.alpha = 1
         collectionView.register(UINib(nibName: "EmojiCell", bundle: nil), forCellWithReuseIdentifier: EmojiCell.reuseId)
         addSubview(self.collectionView)
@@ -59,7 +63,7 @@ class SectionHeader: UICollectionReusableView {
     private func createEmojiSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 8, trailing: 8)
         let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(120), heightDimension: .estimated(50))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
@@ -71,6 +75,7 @@ class SectionHeader: UICollectionReusableView {
     //MARK:- setup constraints
     private func setupConstraints() {
         addSubview(self.collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             self.collectionView.topAnchor.constraint(equalTo: topAnchor),
             self.collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -120,7 +125,6 @@ extension SectionHeader: UICollectionViewDelegate {
         switch section?.type {
         case "Emoji":
             let cell = collectionView.cellForItem(at: indexPath)
-
             if let previousIndex = indexPathOfSelectedCell {
                 let previousCell = collectionView.cellForItem(at: previousIndex)
                 previousCell?.backgroundColor = .clear

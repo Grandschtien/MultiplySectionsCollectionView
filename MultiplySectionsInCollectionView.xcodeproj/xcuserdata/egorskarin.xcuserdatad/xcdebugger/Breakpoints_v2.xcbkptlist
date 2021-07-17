@@ -32,8 +32,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "11"
             endingLineNumber = "11"
-            landmarkName = "ViewController"
-            landmarkType = "3">
+            landmarkName = "sections"
+            landmarkType = "24">
             <Locations>
                <Location
                   uuid = "0F97A621-9E77-4E2F-BA89-ACC8315E44A0 - 2773cdc7558942e4"
@@ -138,8 +138,8 @@
             filePath = "MultiplySectionsInCollectionView/CollectionController/View/Headers/SectionHeader.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "createDataSource()"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,8 +154,8 @@
             filePath = "MultiplySectionsInCollectionView/CollectionController/View/Headers/SectionHeader.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
             landmarkName = "reloadData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -170,8 +170,8 @@
             filePath = "MultiplySectionsInCollectionView/CollectionController/View/Headers/SectionHeader.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "createLayout()"
             landmarkType = "7">
             <Locations>
@@ -218,9 +218,25 @@
             filePath = "MultiplySectionsInCollectionView/CollectionController/View/Headers/SectionHeader.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "createEmojiSection()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "42F0E431-AAF0-4A3C-9057-AAFA344B3F4E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MultiplySectionsInCollectionView/CollectionController/View/Headers/SectionHeader.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "createLayout()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
