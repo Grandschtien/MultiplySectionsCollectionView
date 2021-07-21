@@ -29,6 +29,8 @@
 		60DE47E8269F24C9004C972C /* EmojiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE47E7269F24C9004C972C /* EmojiViewController.swift */; };
 		60DE47EA269F24D9004C972C /* NumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE47E9269F24D9004C972C /* NumberViewController.swift */; };
 		60DE47EC26A1B196004C972C /* CALayer + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE47EB26A1B196004C972C /* CALayer + extension.swift */; };
+		60DE480726A85AA6004C972C /* SecondSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE480526A85AA6004C972C /* SecondSectionHeader.swift */; };
+		60DE480826A85AA6004C972C /* SecondSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60DE480626A85AA6004C972C /* SecondSectionHeader.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +58,8 @@
 		60DE47E7269F24C9004C972C /* EmojiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewController.swift; sourceTree = "<group>"; };
 		60DE47E9269F24D9004C972C /* NumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberViewController.swift; sourceTree = "<group>"; };
 		60DE47EB26A1B196004C972C /* CALayer + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer + extension.swift"; sourceTree = "<group>"; };
+		60DE480526A85AA6004C972C /* SecondSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondSectionHeader.swift; sourceTree = "<group>"; };
+		60DE480626A85AA6004C972C /* SecondSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondSectionHeader.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,7 +141,9 @@
 		60DE47D0269B4264004C972C /* Headers */ = {
 			isa = PBXGroup;
 			children = (
-				60DE47D1269B4273004C972C /* SectionHeader.swift */,
+				60DE480926A861F7004C972C /* OldSectionHeader */,
+				60DE480526A85AA6004C972C /* SecondSectionHeader.swift */,
+				60DE480626A85AA6004C972C /* SecondSectionHeader.xib */,
 			);
 			path = Headers;
 			sourceTree = "<group>";
@@ -276,6 +282,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		60DE480926A861F7004C972C /* OldSectionHeader */ = {
+			isa = PBXGroup;
+			children = (
+				60DE47D1269B4273004C972C /* SectionHeader.swift */,
+			);
+			path = OldSectionHeader;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -335,6 +349,7 @@
 			files = (
 				6022F1622695F6FA00B3A364 /* NumberCell.xib in Resources */,
 				6022F1482695AB9700B3A364 /* LaunchScreen.storyboard in Resources */,
+				60DE480826A85AA6004C972C /* SecondSectionHeader.xib in Resources */,
 				6022F16F2697539E00B3A364 /* model.json in Resources */,
 				6022F1452695AB9700B3A364 /* Assets.xcassets in Resources */,
 				6022F15E2695E64000B3A364 /* EmojiCell.xib in Resources */,
@@ -364,6 +379,7 @@
 				6022F1612695F6FA00B3A364 /* NumberCell.swift in Sources */,
 				60DE47E6269F24B6004C972C /* NameViewController.swift in Sources */,
 				60DE47EC26A1B196004C972C /* CALayer + extension.swift in Sources */,
+				60DE480726A85AA6004C972C /* SecondSectionHeader.swift in Sources */,
 				60DE47EA269F24D9004C972C /* NumberViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

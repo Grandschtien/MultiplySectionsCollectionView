@@ -7,13 +7,24 @@
 
 import UIKit
 
+enum Category: Int {
+    case pizza = 0
+    case combo = 1
+    case appetizers = 2
+    case desserts = 3
+    case drinks = 4
+}
+
 class ViewController: UIViewController {
+    
     private var sections = Bundle.main.decode([Section].self, from: "model.json").filter { section in
         return section.type != "Emoji"
     }
     static let sectionBackgroundDecorationElementKind = "background-element-kind"
     fileprivate var dataSource: UICollectionViewDiffableDataSource<Section, Item>! = nil
     fileprivate var collectionView: UICollectionView! = nil
+    fileprivate var selectedCategory: IndexPath?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Sections"
@@ -23,6 +34,7 @@ class ViewController: UIViewController {
         configureDataSource()
         reloadData()
         collectionView.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(recieveNotification), name: Notification.Name("SelectedIndexPath"), object: nil)
     }
     //MARK:- Configurate collectionView
     private func configure() {
@@ -33,7 +45,8 @@ class ViewController: UIViewController {
         view.addSubview(collectionView!)
         collectionView.register(UINib(nibName: "NumberCell", bundle: nil), forCellWithReuseIdentifier: NumberCell.reuseId)
         collectionView.register(UINib(nibName: "StringCell", bundle: nil), forCellWithReuseIdentifier: StringCell.reuseId)
-        collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseId)
+        //collectionView.register(SecondSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseId)
+        collectionView.register(UINib(nibName: "SecondSectionHeader", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SecondSectionHeader.reuseId)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
        
@@ -79,27 +92,24 @@ extension ViewController {
         let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .estimated(250),
                                                      heightDimension: .estimated(88))
         let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitems: [layoutItem])
-        
         let section = NSCollectionLayoutSection(group: layoutGroup)
         section.orthogonalScrollingBehavior = .continuous
         section.contentInsets = NSDirectionalEdgeInsets.init(top: 10, leading: 12, bottom: 15, trailing: 12)
         return section
     }
     private func createStringSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(100))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.2))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(
             elementKind: ViewController.sectionBackgroundDecorationElementKind)
-        sectionBackgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 90, leading: 0, bottom: 0, trailing: 0)
+        sectionBackgroundDecoration.contentInsets = NSDirectionalEdgeInsets(top: 80, leading: 0, bottom: 0, trailing: 0)
         section.decorationItems = [sectionBackgroundDecoration]
         let header = createHeader()
         section.boundarySupplementaryItems = [header]
-        header.zIndex = 2
-        header.pinToVisibleBounds = true
+        sectionBackgroundDecoration.zIndex = 1
         return section
     }
 }
@@ -126,7 +136,8 @@ extension ViewController {
         }
         dataSource.supplementaryViewProvider = {
             collectionView, kind, indexPath in
-            guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeader.reuseId, for: indexPath) as? SectionHeader else { return nil }
+            print(kind)
+            guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SecondSectionHeader.reuseId, for: indexPath) as? SecondSectionHeader else { return nil }
             return sectionHeader
         }
     }
@@ -148,9 +159,10 @@ extension ViewController {
 //MARK:- Header to collectionView
 extension ViewController {
     private func createHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(100))
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(80))
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-        header.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 10, trailing: 0)
+        header.pinToVisibleBounds = true
+        header.zIndex = 2
         return header
     }
 }
@@ -164,12 +176,16 @@ extension ViewController: UICollectionViewDelegate{
         switch section?.type {
         case "Numbers":
             performSegue(withIdentifier: "NumberSegue", sender: nil)
+            print(indexPath)
         case "Names":
+            print(indexPath)
             performSegue(withIdentifier: "NameSegue", sender: nil)
         default:
             break
         }
     }
+    
+ 
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? NumberCell else { return }
         UIView.animate(withDuration: 0.3) {
@@ -210,3 +226,30 @@ extension ViewController {
     }
 }
 
+//MARK:- Recieve notification
+
+extension ViewController {
+    @objc func recieveNotification(notification: Notification) {
+        guard let indexPath =  notification.userInfo?["indexPath"] as? IndexPath else { return }
+        let category = Category(rawValue: indexPath.item)
+        let pizza = IndexPath(item: 3, section: 1)
+        let combo = IndexPath(item: 6, section: 1)
+        let appetizers = IndexPath(item: 7, section: 1)
+        let desserts = IndexPath(item: 8, section: 1)
+        let drinks = IndexPath(item: 10, section: 1)
+        switch category {
+        case .pizza:
+            collectionView.scrollToItem(at: pizza, at: .top, animated: true)
+        case .combo:
+            collectionView.scrollToItem(at: combo, at: .top, animated: true)
+        case .appetizers:
+            collectionView.scrollToItem(at: appetizers, at: .top, animated: true)
+        case .desserts:
+            collectionView.scrollToItem(at: desserts, at: .top, animated: true)
+        case .drinks:
+            collectionView.scrollToItem(at: drinks, at: .top, animated: true)
+        default:
+            print("Unknown indexPath")
+        }
+    }
+}

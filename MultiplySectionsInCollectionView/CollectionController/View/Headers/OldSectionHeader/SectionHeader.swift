@@ -7,11 +7,16 @@
 
 import UIKit
 
+
+
+
 class SectionHeader: UICollectionReusableView {
+    
     static let reuseId = "SectionHeader"
     var sections: [Section] = Bundle.main.decode([Section].self, from: "model.json").filter { section in
         return section.type != "Names" && section.type != "Numbers"
     }
+    
     private var indexPathOfSelectedCell: IndexPath?
     
     fileprivate var collectionView: UICollectionView! = nil
@@ -34,12 +39,11 @@ class SectionHeader: UICollectionReusableView {
     //MARK:- Configure collection view
     private func cofigureCollectionView() {
         collectionView = UICollectionView(frame: self.bounds, collectionViewLayout: createLayout())
-        //collectionView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collectionView.layer.shadowOffset = CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
         collectionView.backgroundColor = #colorLiteral(red: 0.880524771, green: 0.9031272657, blue: 0.875127862, alpha: 1)
         collectionView.alpha = 1
         collectionView.register(UINib(nibName: "EmojiCell", bundle: nil), forCellWithReuseIdentifier: EmojiCell.reuseId)
-        addSubview(self.collectionView)
     }
     
     
@@ -56,6 +60,7 @@ class SectionHeader: UICollectionReusableView {
                 return nil
             }
         }
+        
         return layout
     }
     
@@ -68,22 +73,21 @@ class SectionHeader: UICollectionReusableView {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 12, bottom: 15, trailing: 12)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 12, bottom: 0, trailing: 12)
         return section
     }
     
     //MARK:- setup constraints
     private func setupConstraints() {
-        addSubview(self.collectionView)
+        self.addSubview(self.collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        let inset = CGFloat(10)
         NSLayoutConstraint.activate([
-            self.collectionView.topAnchor.constraint(equalTo: topAnchor),
-            self.collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            self.collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            self.collectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            self.collectionView.topAnchor.constraint(equalTo: self.topAnchor),
+            self.collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            self.collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            self.collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -inset)
         ])
-
-
     }
     
     //MARK:- Create data source
@@ -125,6 +129,7 @@ extension SectionHeader: UICollectionViewDelegate {
         switch section?.type {
         case "Emoji":
             let cell = collectionView.cellForItem(at: indexPath)
+            NotificationCenter.default.post(name: Notification.Name("SelectedIndexPath"), object: nil, userInfo: ["indexPath":indexPath])
             if let previousIndex = indexPathOfSelectedCell {
                 let previousCell = collectionView.cellForItem(at: previousIndex)
                 previousCell?.backgroundColor = .clear
@@ -132,6 +137,7 @@ extension SectionHeader: UICollectionViewDelegate {
             } else {
                 cell?.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
             }
+            collectionView.scrollToItem(at: indexPath, at: .left, animated: true)
             indexPathOfSelectedCell = indexPath
         default:
             break
